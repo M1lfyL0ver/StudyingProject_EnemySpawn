@@ -3,30 +3,22 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class Enemy : MonoBehaviour
 {
+    private Rigidbody _rigidbody;
+    private Vector3 _direction;
     private float _speed = 5f;
-    private bool _isAbleToMove = false;
+
+    private void OnEnable()
+    {
+        _rigidbody = GetComponent<Rigidbody>();
+    }
 
     private void FixedUpdate()
     {
-        if (_isAbleToMove)
-        {
-            transform.position += transform.forward.normalized * _speed * Time.fixedDeltaTime;
-        }
-    }
-
-    private void OnDisable()
-    {
-        EndMovement();
+        _rigidbody.linearVelocity = _direction.normalized * _speed + new Vector3(0, _rigidbody.linearVelocity.y, 0);
     }
 
     public void StartMovement(Vector3 direction)
     {
-        transform.rotation = Quaternion.LookRotation(direction);
-        _isAbleToMove = true;
-    }
-
-    public void EndMovement()
-    {
-        _isAbleToMove = false;
+        _direction = direction;
     }
 }
