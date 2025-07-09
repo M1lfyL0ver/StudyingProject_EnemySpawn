@@ -17,8 +17,10 @@ public class Enemy : MonoBehaviour
         _rigidbody.linearVelocity = _direction.normalized * _speed + new Vector3(0, _rigidbody.linearVelocity.y, 0);
     }
 
-    public void StartMovement(Vector3 direction)
+    public void StartMovement(Target target)
     {
-        _direction = direction;
+        Vector3 targetPosition = new Vector3(target.transform.position.x, 0, target.transform.position.z) ;
+
+        _direction = targetPosition - transform.position;
     }
 }

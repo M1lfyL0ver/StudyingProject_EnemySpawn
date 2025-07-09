@@ -6,6 +6,7 @@ using Random = UnityEngine.Random;
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private Enemy _enemyPrefab;
+    [SerializeField] private Target _target;
     [SerializeField] private float _enemySpawnTime = 2f;
 
     private ObjectPool<Enemy> _enemyPool;
@@ -45,7 +46,7 @@ public class EnemySpawner : MonoBehaviour
 
             Enemy enemy = _enemyPool.Get();
             enemy.transform.position = transform.position + new Vector3(spawnPositionX, spawnPositionY, spawnPositionZ);
-            enemy.StartMovement(new Vector3(spawnPositionX, 0, spawnPositionZ));
+            enemy.StartMovement(_target);
         }
     }
 }
