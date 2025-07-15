@@ -29,10 +29,10 @@ public class EnemySpawner : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(SpawnEnemy(_enemySpawnTime));
+        StartCoroutine(SpawnEnemies(_enemySpawnTime));
     }
 
-    private IEnumerator SpawnEnemy(float time)
+    private IEnumerator SpawnEnemies(float time)
     {
         WaitForSeconds timeDelay = new WaitForSeconds(time);
 
@@ -46,7 +46,7 @@ public class EnemySpawner : MonoBehaviour
 
             Enemy enemy = _enemyPool.Get();
             enemy.transform.position = transform.position + new Vector3(spawnPositionX, spawnPositionY, spawnPositionZ);
-            enemy.StartMovement(_target);
+            enemy.StartMovementToTarget(_target);
         }
     }
 }
